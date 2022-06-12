@@ -1,17 +1,62 @@
-#define classes 
+#IMPORT FUNCTIONS 
 import inspect
+
+#DEFINE CLASSES 
+#define Beings 
 class Beings:   
 
-    def __init__(self, strength, speed, agility, intelligence, magic):
+    def __init__(self, strength, speed, agility, intelligence, magic, stamina):
         self.strength = strength
         self.speed = speed
         self.agility = agility
         self.intelligence = intelligence 
         self.magic = magic 
+        self.stamina = stamina 
+        self.health = 5
+        self.max_health = 5
+        self.is_knocked_out = False
+        self.attack_power 
+    
+    def knock_out(self):
+        if self.health == 0:
+            self.is_knocked_out = True
+            print("{name} was knocked out!".format(name = self))
 
-    def attack_power (self):
+    def lose_health(self):
+        if self.stamina == 0:
+            self.health -= 1
+            if self.health <= 0:
+                self.health = 0
+                self.knock_out()
+            else:
+                print("{name} now has {health} health.".format(name = self, health = self.health))
+        else: 
+            print("Stamina: {stamina}, Health:{health}". format(stamina = self.stamina, health = self.health))
+    def gain_health(self, amount):
+        if self.health == 0:
+            print("{name} is knocked out".format(name = self))
+        
+        self.health += amount
+
+        if self.health >= self.max_health:
+            self.health = self.max_health
+        print("{name} now has {health} health.".format(name = self.name, health = self.health))
+
+    def attack_points (self):
         self.attack_power = self.strength + self.agility + self.intelligence + self.magic
         return self.attack_power
+   
+    def attack(self, other_being):
+        if self.attack_power > other_being.attack_power: 
+            other_being.stamina -= 1 
+        if self.attack_power < other_being.attack_power:
+            self.stamina -= 1 
+        else:
+            print({"No damage from Being attack power"})
+ 
+
+
+
      
 class Elf(Beings):
     def __init__(self, strength = 3, speed = 5, agility = 5, intelligence = 5, magic = 3, stamina = 4):
@@ -81,16 +126,29 @@ class Wizard (Beings):
                 return self.attack_power
 
 
-
+#Define Arms 
 class Arms: 
-    def __init__(self, attack, resistance):
-        self.attack = attack
-        self.resistance = resistance
+    def __init__(self):
+        self.resistance 
+        self.attack 
     
 class Blades (Arms):
-    def __init__(self, attack, resistance = 3):
-        self.attack = attack
+    def __init__(self):
+        self.resistance 
+        self.being
+        self.attack
+    
+    def resistance_points(self, being, resistance = 2):
+        self.being = being
         self.resistance = resistance
+        if isinstance (self.being, Human) == True:
+            self.resistance = self.resistance + 3
+        if isinstance (self.being, Elf) == True:
+            self.resistance = self.resistance + 2
+        if isinstance (self.being, Dwarf) == True:
+            self.resistance = self.resistance - 1
+        else:
+            return 
 
     def attack_power (self, being):
         self.being = being 
@@ -113,9 +171,18 @@ class Blades (Arms):
 
 class Axes (Arms):
 
-    def __init__(self, attack, resistance = 5):
-        self.attack = attack
+    def __init__(self):
+        self.resistance 
+        self.being
+        self.attack
+
+    def resistance_points(self, being, resistance = 5):
+        self.being = being
         self.resistance = resistance
+        if isinstance (self.being, Elf) == True:
+            self.resistance = self.resistance - 1 
+        else:
+            return 
 
     def attack_power (self, being):
         self.being = being 
@@ -136,10 +203,13 @@ class Axes (Arms):
 
         
 class Bows(Arms):
-    def __init__(self, resistance = 2):
-        self.resistance = resistance
+    def __init__(self):
+        self.resistance 
+        self.being
+        self.attack
 
-    def being_resistance_check(self, being, resistance):
+
+    def resistance_points(self, being, resistance = 2):
             self.being = being
             self.resistance = resistance
             if isinstance (self.being, Elf) == True:
@@ -168,10 +238,12 @@ class Bows(Arms):
             print("The being entered does not belong to an acceptable class")
 
 class Wizard_Staff(Arms):
-    def __init__(self, resistance = 2):
-        self.resistance = resistance
+    def __init__(self):
+        self.resistance 
+        self.being
+        self.attack
 
-    def being_resistance_check(self, being, resistance = 2):
+    def resistance_points(self, being, resistance = 2):
         self.being = being
         self.resistance = resistance
         if isinstance (self.being, Wizard) == True:
@@ -197,6 +269,10 @@ class Wizard_Staff(Arms):
             self.attack = False
             print("The being entered does not belong to an acceptable class")
 
+
+# Define Enchantments 
+
+
 elf1 = Elf()
 human1 = Human()
 dwarf1 = Dwarf()
@@ -204,42 +280,4 @@ hobbit1 = Hobbit()
 wizard1 = Wizard()
 gollum = "Gollum"
 
-bow1 = Bows()
-wizard_staff1 = Wizard_Staff()
-
-bow1.attack_power (being = elf1)
-#print(bow1.attack)
-
-bow1.attack_power (being = human1)
-#print(bow1.attack)
-
-bow1.attack_power (being = dwarf1)
-#print(bow1.attack)
-
-bow1.attack_power (being = hobbit1)
-#print(bow1.attack)
-#print(bow1.resistance) 
-#print("bow resistance:{resist}".format(resist = bow1.resistance))
-
-bow1.attack_power (being = wizard1)
-#print(bow1.attack)
-#print("bow resistance:{resist}".format(resist = bow1.resistance))
-
-bow1.attack_power (being = gollum)
-#print(bow1.attack)
-
-wizard_staff1.being_resistance_check(being = wizard1)
-#print(wizard_staff1.resistance)
-
-wizard_staff1.being_resistance_check(being = hobbit1)
-#print(wizard_staff1.resistance)
-
-bow1.being_resistance_check(being = elf1)
-print(bow1.resistance)
-
-bow1.being_resistance_check(being = dwarf1)
-print(bow1.resistance)
-
-bow1.being_resistance_check(being = hobbit1)
-print(bow1.resistance)
 
