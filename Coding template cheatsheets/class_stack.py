@@ -2,11 +2,12 @@ from class_node import Node
 
 
 class Stack:
-    def __init__(self, limit=1000):
-        self.top_item = None
+    def __init__(self, name):
         self.size = 0
-        self.limit = limit
-  
+        self.top_item = None
+        self.limit = 1000
+        self.name = name
+    
     def push(self, value):
         if self.has_space(): 
             item = Node(value)
