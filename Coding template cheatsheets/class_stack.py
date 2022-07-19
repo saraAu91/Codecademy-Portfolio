@@ -38,3 +38,18 @@ class Stack:
     def is_empty(self):
         if self.size == 0:
             return True 
+    
+    def get_size(self):
+        return self.size
+  
+    def get_name(self):
+        return self.name
+    
+    def print_items(self):
+        pointer = self.top_item
+        print_list = []
+        while(pointer):
+            print_list.append(pointer.get_value())
+            pointer = pointer.get_next_node()
+        print_list.reverse()
+        print("{0} Stack: {1}".format(self.get_name(), print_list))
