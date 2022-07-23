@@ -18,7 +18,7 @@ class HashMap:
     payload = Node([key, value])
     list_at_array = self.array[array_index]
     for item in list_at_array:
-      if key == item[0]: 
+      if item[0] == key: 
         item[1] = value
         return  
     list_at_array.insert(payload)
