@@ -1,0 +1,134 @@
+Linked lists are one of the basic data structures used in computer science. 
+They have many direct applications and serve as the foundation for more complex data structures.
+
+The list is comprised of a series of nodes as shown in the diagram above. 
+The head node is the node at the beginning of the list. Each node contains data and a link (or pointer) to the next node in the list. 
+The list is terminated when a node’s link is null. This last node is called the tail node.
+
+Common operations on a linked list may include:
+
+- adding nodes
+- removing nodes
+- finding a node
+- traversing (or traveling through) the linked list
+
+Adding a New Node
+Adding a new node to the beginning of the list requires you to link your new node to the current head node. 
+This way, you maintain your connection with the following nodes in the list.
+
+Removing a Node
+If you accidentally remove the single link to a node, that node’s data and any following nodes could be lost to your application, leaving you with orphaned nodes.
+
+To properly maintain the list when removing a node from the middle of a linked list, you need to be sure to adjust the link on the previous node so that it points to the following node.
+
+Depending on the language, nodes that are not referenced are removed automatically. “Removing” a node is equivalent to removing all references to the node.
+
+
+Swapping Elements in a Linked List
+
+Given a linked list and the elements to be swapped (val1 and val2), we need to keep track of four values:
+
+node1: the node that matches val1
+node1_prev: node1‘s previous node
+node2: the node that matches val2
+node2_prev: node2‘s previous node
+Given an input of a linked list, val1, and val2, the general steps for doing so is as follows:
+
+Iterate through the list looking for the node that matches val1 to be swapped (node1), keeping track of the node’s previous node as you iterate (node1_prev)
+Repeat step 1 looking for the node that matches val2 (giving you node2 and node2_prev)
+If node1_prev is None, node1 was the head of the list, so set the list’s head to node2
+Otherwise, set node1_prev‘s next node to node2
+If node2_prev is None, set the list’s head to node1
+Otherwise, set node2_prev‘s next node to node1
+Set node1‘s next node to node2‘s next node
+Set node2‘s next node to node1‘s next node
+
+
+
+Two-Pointer Linked List Techniques
+
+nth last pointer = None
+tail pointer = linked list head
+count = 1
+
+while tail pointer exists
+  move tail pointer forward
+  increment count
+
+  if count >= n + 1
+    if nth last pointer is None
+      set nth last pointer to head
+    else
+      move nth last pointer forward
+
+return nth last pointer
+
+When the tail pointer moves n nodes into the linked list from its starting position of 1, it will be at position n + 1. We want the nth last pointer to be n nodes behind, so we set the nth last pointer to the head node at position 1. This is because the position n nodes behind the n + 1th node is (n + 1) - (n) = 1. Then, each following iteration will move both pointers at the same speed, until the tail pointer points to the end of the linked list.
+
+def nth_last_node(linked_list, n):
+  current = None
+  tail_seeker = linked_list.head_node
+  count = 1
+  while tail_seeker:
+    tail_seeker = tail_seeker.get_next_node()
+    count += 1
+    if count >= n + 1:
+      if current is None:
+        current = linked_list.head_node
+      else:
+        current = current.get_next_node()
+  return current
+
+
+    Pointers at Different Speeds
+
+    The first pointer takes two steps through the linked list for every one step that the second takes, so it iterates twice as fast:
+
+    fast pointer = linked list head
+    slow pointer = linked list head
+    while fast pointer is not None
+        move fast pointer forward
+        if the end of the linked list has not been reached
+            move fast pointer forward
+            move slow pointer forward
+    return slow pointer
+    
+    When the first pointer reaches the end of the list, the “slower” second pointer will be pointing to the middle element. As long as we always move the fast pointer first and check to see that it is not None before moving it and the slow pointer again, we’ll exit iteration at the proper time and have a reference to the middle node with the slow pointer.
+
+
+Doubly Linked Lists
+
+Like a singly linked list, a doubly linked list is comprised of a series of nodes. Each node contains data and two links (or pointers) to the next and previous nodes in the list. The head node is the node at the beginning of the list, and the tail node is the node at the end of the list. The head node’s previous pointer is set to null and the tail node’s next pointer is set to null.
+
+Adding to the list
+In a doubly linked list, adding to the list is a little complicated as we have to keep track of and set the node’s previous pointer as well as update the tail of the list if necessary.
+
+    Adding to the head
+    When adding to the head of the doubly linked list, we first need to check if there is a current head to the list. If there isn’t, then the list is empty, and we can simply make our new node both the head and tail of the list and set both pointers to null. If the list is not empty, then we will:
+
+    - Set the current head’s previous pointer to our new head.
+    - Set the new head’s next pointer to the current head.
+    - Set the new head’s previous pointer to null.
+
+    Adding to the tail
+    Similarly, there are two cases when adding a node to the tail of a doubly linked list. If the list is empty, then we make the new node the head and tail of the list and set the pointers to null. If the list is not empty, then we:
+
+    - Set the current tail’s next pointer to the new tail
+    - Set the new tail’s previous pointer to the current tail
+    - Set the new tail’s next pointer to null
+
+Removing from the list
+Due to the extra pointer and tail property, removing the head from a doubly linked list is slightly more complicated than removing the head from a singly linked list. However, the previous pointer and tail property make it much simpler to remove the tail of the list, as we don’t have to traverse the entire list to be able to do it.
+   
+    Removing the head
+        Removing the head involves updating the pointer at the beginning of the list. We will set the previous pointer of the new head (the element directly after the current head) to null, and update the head property of the list. If the head was also the tail, the tail removal process will occur as well.
+
+    Removing the tail
+        Similarly, removing the tail involves updating the pointer at the end of the list. We will set the next pointer of the new tail (the element directly before the tail) to null, and update the tail property of the list. If the tail was also the head, the head removal process will occur as well.
+
+    Removing from the middle of the list
+        It is also possible to remove a node from the middle of the list. Since that node is neither the head nor the tail of the list, there are two pointers that must be updated:
+
+        We must set the removed node’s preceding node’s next pointer to its following node.
+        We must set the removed node’s following node’s previous pointer to its preceding node.
+        There is no need to change the pointers of the removed node, as updating the pointers of its neighboring nodes will remove it from the list. If no nodes in the list are pointing to it, the node is orphaned.
