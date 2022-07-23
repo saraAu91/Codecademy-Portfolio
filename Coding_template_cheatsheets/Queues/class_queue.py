@@ -1,5 +1,5 @@
 
-from class_node import Node
+from Coding_template_cheatsheets.Nodes_and_Linked_Lists.class_node import Node
 
 
 class Queue:
