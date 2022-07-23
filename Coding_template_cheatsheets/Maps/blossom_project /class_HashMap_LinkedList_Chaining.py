@@ -22,7 +22,7 @@ class HashMap:
         item[1] = value
         return  
     list_at_array.insert(payload)
-    return 
+   
 
   def retrieve(self, key):
     array_index = self.compress(self.hash(key))
