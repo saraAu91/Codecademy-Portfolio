@@ -21,7 +21,7 @@ class HashMap:
             if item[0] == key:
               item[1] = value
               return
-        list_at_array.insert_beginning(payload)
+        list_at_array.insert(payload)
 
     def retrieve(self, key):
         array_index = self.compress(self.hash(key))
