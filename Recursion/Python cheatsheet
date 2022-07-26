@@ -1,3 +1,0 @@
-#flatten()
-
-#We want to write a function that removes nested lists within a list but keeps the values contained.
