@@ -1,6 +1,6 @@
 #Cheatsheet 
-
+my_list = []
 #LIST
-isinstance() >> # to check if the item is a type of python class - Return True if it is a list and Fals eif it is not 
+isinstance()  # to check if the item is a type of python class - Return True if it is a list and Fals if it isn't
 
 isinstance(my_list, list) >> True 
