@@ -1,0 +1,6 @@
+#Cheatsheet 
+
+#LIST
+isinstance() >> # to check if the item is a type of python class - Return True if it is a list and Fals eif it is not 
+
+isinstance(my_list, list) >> True 
