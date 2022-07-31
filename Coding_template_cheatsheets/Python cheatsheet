@@ -4,3 +4,14 @@ my_list = []
 isinstance()  # to check if the item is a type of python class - Return True if it is a list and Fals if it isn't
 
 isinstance(my_list, list) >> True 
+
+##Python if not – String
+#In this example, we will use Python if not expression to print the string only if the string is not empty.
+
+
+string_1 = ''
+
+if not string_1:
+    print('String is empty.')
+else:
+    print(string_1)

@@ -1,4 +1,4 @@
-from Coding_template_cheatsheets.Linked_Lists.Nodes_linklist_template import Node, LinkedList
+from Coding_template_cheatsheets.Nodes_and_Linked_Lists.Nodes_linklist_template import Node, LinkedList
 
 class HashMap: 
 
