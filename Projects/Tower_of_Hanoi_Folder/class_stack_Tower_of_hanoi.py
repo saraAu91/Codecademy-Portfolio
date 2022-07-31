@@ -1,4 +1,4 @@
-from Coding_template_cheatsheets.Nodes_and_Linked_Lists.class_node import Node
+from class_node_Tower_of_Hanoi import Node
 
 
 class Stack:
