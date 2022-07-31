@@ -1,4 +1,4 @@
-from Coding_template_cheatsheets.Stacks.class_stack import Stack
+from class_stack import Stack
 
 print("\nLet's play Towers of Hanoi!!")
 
